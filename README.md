@@ -17,6 +17,11 @@ cd build
 cmake ..
 make
 ./app "../../data/me.jpeg" "../../data/yolov7.onnx" 640 640
+{
+ "objects": [ 
+  {"class_id":0, "name":"person", "coordinates":{"x":72, "y":84, "width":842, "height":603}, "confidence":0.825500}  {"class_id":67, "name":"cell phone", "coordinates":{"x":15, "y":122, "width":247, "height":345}, "confidence":0.825312}  {"class_id":0, "name":"person", "coordinates":{"x":0, "y":233, "width":154, "height":456}, "confidence":0.449767}
+ ] 
+}
 ```
 
 :information_source: If you got following error, you must install [opencv](https://github.com/opencv/opencv) on your system.
