@@ -1,6 +1,6 @@
 
 # yolov7.cpp
-Object Detection using YOLOv7 and OpenCV DNN C++
+Simple JSON Object Detection using YOLOv7 and OpenCV DNN C++
 
 ### Prepare custom weight
 Download my pre converted weights
