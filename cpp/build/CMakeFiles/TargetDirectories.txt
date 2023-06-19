@@ -1,0 +1,3 @@
+/home/kal/Documents/PixelCoda/YoloV7.cpp/cpp/build/CMakeFiles/app.dir
+/home/kal/Documents/PixelCoda/YoloV7.cpp/cpp/build/CMakeFiles/edit_cache.dir
+/home/kal/Documents/PixelCoda/YoloV7.cpp/cpp/build/CMakeFiles/rebuild_cache.dir
