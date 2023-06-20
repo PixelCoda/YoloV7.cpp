@@ -22,6 +22,22 @@ extension URL {
     }
 }
 
+
+var path = UserDefaults.standard.string(forKey: "path").unsafelyUnwrapped
+
+if(path.hasPrefix("./")){
+    path = path.replacingOccurrences(of: "./", with: "")
+    path = "file://" + FileManager.default.currentDirectoryPath + "/" + path
+}
+
+if(!path.hasPrefix("/") && !path.hasPrefix("file://") && !path.hasPrefix("http://") && !path.hasPrefix("https://")){
+    path = "file://" + FileManager.default.currentDirectoryPath + "/" + path
+}
+
+if(!path.hasPrefix("file://") && !path.hasPrefix("http://") && !path.hasPrefix("https://")){
+    path = "file://" + path
+}
+
 var objects: [PredictedObject] = []
 
 let mlmodel = try yolov7(contentsOf: yolov7.urlOfModelInThisBundle)
@@ -30,7 +46,7 @@ let mlmodel = try yolov7(contentsOf: yolov7.urlOfModelInThisBundle)
 let visionModel = try VNCoreMLModel(for: mlmodel.model)
 
 // Create an image classification request with an image classifier model.
-let handler = VNImageRequestHandler(cgImage: loadImage(name: "https://futurearchitectureplatform.org/media/cache/c1/02/c102718392d6da8c5669695f672030ae.jpg"), orientation: CGImagePropertyOrientation.up)
+let handler = VNImageRequestHandler(cgImage: loadImage(name: path), orientation: CGImagePropertyOrientation.up)
 
 
 let imageClassificationRequest = VNCoreMLRequest(model: visionModel, completionHandler: { (request, error) in
@@ -86,10 +102,9 @@ func convertCIImageToCGImage(inputImage: CIImage) -> CGImage? {
     return nil
 }
 
-func loadImage(name: StaticString) -> CGImage {
-    let url = URL(staticString: name)
+func loadImage(name: String) -> CGImage {
+    let url = URL(string: name).unsafelyUnwrapped
 
-    
     let sourceImage = CIImage(contentsOf: url)
     let resizeFilter = CIFilter(name:"CILanczosScaleTransform")!
 
